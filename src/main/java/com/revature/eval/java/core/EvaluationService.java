@@ -4,8 +4,8 @@ import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
 
-public class EvaluationService {
-
+public class EvaluationService 
+{
 	/**
 	 * 1. Without using the StringBuilder or StringBuffer class, write a method that
 	 * reverses a String. Example: reverse("example"); -> "elpmaxe"
@@ -13,11 +13,15 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public String reverse(String string) {
+	public String reverse(String string) 
+	{
 		char[] reversed = new char[string.length()];
-		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) {
+		
+		for (int i = reversed.length - 1, j=0; i >= 0; i--, j++) 
+		{
 			reversed[j] = string.charAt(i);
 		}
+		
 		return new String(reversed);
 	}
 
@@ -29,9 +33,26 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
-	public String acronym(String phrase) {
+	public String acronym(String phrase) 
+	{
 		// TODO Write an implementation for this method declaration
-		return null;
+		String result = phrase.substring(0, 1);
+		
+		for(int i = 0; i < phrase.length(); i++)
+		{
+			if(phrase.charAt(i) == ' ')
+			{
+				result += phrase.charAt(i + 1);
+			}
+			
+			if(phrase.charAt(i) == '-')
+			{
+				result += phrase.charAt(i + 1);
+			}
+		}
+		
+		result = result.toUpperCase();
+		return result;
 	}
 
 	/**
@@ -41,29 +62,33 @@ public class EvaluationService {
 	 * as having exactly two sides the same length, but for the purposes of this
 	 * exercise we'll say at least two.) A scalene triangle has all sides of
 	 * different lengths.
-	 *
 	 */
-	static class Triangle {
+	static class Triangle 
+	{
 		private double sideOne;
 		private double sideTwo;
 		private double sideThree;
 
-		public Triangle() {
+		public Triangle() 
+		{
 			super();
 		}
 
-		public Triangle(double sideOne, double sideTwo, double sideThree) {
+		public Triangle(double sideOne, double sideTwo, double sideThree) 
+		{
 			this();
 			this.sideOne = sideOne;
 			this.sideTwo = sideTwo;
 			this.sideThree = sideThree;
 		}
 
-		public double getSideOne() {
+		public double getSideOne() 
+		{
 			return sideOne;
 		}
 
-		public void setSideOne(double sideOne) {
+		public void setSideOne(double sideOne) 
+		{
 			this.sideOne = sideOne;
 		}
 
@@ -75,29 +100,47 @@ public class EvaluationService {
 			this.sideTwo = sideTwo;
 		}
 
-		public double getSideThree() {
+		public double getSideThree() 
+		{
 			return sideThree;
 		}
 
-		public void setSideThree(double sideThree) {
+		public void setSideThree(double sideThree) 
+		{
 			this.sideThree = sideThree;
 		}
 
-		public boolean isEquilateral() {
+		public boolean isEquilateral() 
+		{
 			// TODO Write an implementation for this method declaration
+			if((getSideOne() == getSideTwo()) && (getSideTwo() == getSideThree()))
+			{
+				return true;
+			}
 			return false;
 		}
 
-		public boolean isIsosceles() {
+		public boolean isIsosceles()
+		{
 			// TODO Write an implementation for this method declaration
+			if((getSideOne() == getSideTwo()) || (getSideTwo() == getSideThree()) 
+					|| (getSideThree() == getSideOne()))
+			{
+				return true;
+			}
 			return false;
 		}
 
-		public boolean isScalene() {
+		public boolean isScalene() 
+		{
 			// TODO Write an implementation for this method declaration
+			if((getSideOne() != getSideTwo()) && (getSideTwo() != getSideThree())
+					&& (getSideThree() != getSideOne()))
+			{
+				return true;
+			}
 			return false;
 		}
-
 	}
 
 	/**
@@ -115,9 +158,72 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public int getScrabbleScore(String string) {
+	public int getScrabbleScore(String string) 
+	{
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		
+		for(int i = 0; i < string.length(); i++)
+		{
+			string = string.toUpperCase();
+			
+			switch(string.charAt(i))
+			{
+			case 'A': score += 1;
+					  break;
+			case 'E': score += 1;
+			  		  break;
+			case 'I': score += 1;
+			  		  break;
+			case 'O': score += 1;
+			  		  break;
+			case 'U': score += 1;
+			  		  break;
+			case 'L': score += 1;
+			  		  break;
+			case 'N': score += 1;
+			  		  break;
+			case 'R': score += 1;
+			  		  break;
+			case 'S': score += 1;
+			  		  break;
+			case 'T': score += 1;
+			  		  break;
+			case 'D': score += 2;
+			  		  break;
+			case 'G': score += 2;
+			  		  break;
+			case 'B': score += 3;
+					  break;
+			case 'C': score += 3;
+					  break;
+			case 'M': score += 3;
+			  		  break;
+			case 'P': score += 3;
+			  		  break;
+			case 'F': score += 4;
+			  		  break;
+			case 'H': score += 4;
+			  		  break;
+			case 'V': score += 4;
+			  		  break;
+			case 'W': score += 4;
+			  		  break;
+			case 'Y': score += 4;
+			  		  break;
+			case 'K': score += 5;
+			  		  break;
+			case 'J': score += 8;
+					  break;
+			case 'X': score += 8;
+			  		  break;
+			case 'Q': score += 10;
+			  		  break;
+			case 'Z': score += 10;
+			  		  break;
+			}
+		}
+		return score;
 	}
 
 	/**
@@ -151,7 +257,8 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
+	public String cleanPhoneNumber(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return null;
 	}
@@ -165,7 +272,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public Map<String, Integer> wordCount(String string) {
+	public Map<String, Integer> wordCount(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return null;
 	}
@@ -203,29 +311,32 @@ public class EvaluationService {
 	 * A binary search halves the number of items to check with each iteration, so
 	 * locating an item (or determining its absence) takes logarithmic time. A
 	 * binary search is a dichotomic divide and conquer search algorithm.
-	 * 
 	 */
-	static class BinarySearch<T> {
+	static class BinarySearch<T> 
+	{
 		private List<T> sortedList;
 
-		public int indexOf(T t) {
+		public int indexOf(T t) 
+		{
 			// TODO Write an implementation for this method declaration
 			return 0;
 		}
 
-		public BinarySearch(List<T> sortedList) {
+		public BinarySearch(List<T> sortedList) 
+		{
 			super();
 			this.sortedList = sortedList;
 		}
 
-		public List<T> getSortedList() {
+		public List<T> getSortedList() 
+		{
 			return sortedList;
 		}
 
-		public void setSortedList(List<T> sortedList) {
+		public void setSortedList(List<T> sortedList) 
+		{
 			this.sortedList = sortedList;
 		}
-
 	}
 
 	/**
@@ -245,7 +356,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public String toPigLatin(String string) {
+	public String toPigLatin(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return null;
 	}
@@ -265,7 +377,8 @@ public class EvaluationService {
 	 * @param input
 	 * @return
 	 */
-	public boolean isArmstrongNumber(int input) {
+	public boolean isArmstrongNumber(int input) 
+	{
 		// TODO Write an implementation for this method declaration
 		return false;
 	}
@@ -280,7 +393,8 @@ public class EvaluationService {
 	 * @param l
 	 * @return
 	 */
-	public List<Long> calculatePrimeFactorsOf(long l) {
+	public List<Long> calculatePrimeFactorsOf(long l) 
+	{
 		// TODO Write an implementation for this method declaration
 		return null;
 	}
@@ -311,19 +425,21 @@ public class EvaluationService {
 	 * gur ynml qbt. ROT13 Gur dhvpx oebja sbk whzcf bire gur ynml qbt. gives The
 	 * quick brown fox jumps over the lazy dog.
 	 */
-	static class RotationalCipher {
+	static class RotationalCipher 
+	{
 		private int key;
 
-		public RotationalCipher(int key) {
+		public RotationalCipher(int key) 
+		{
 			super();
 			this.key = key;
 		}
 
-		public String rotate(String string) {
+		public String rotate(String string) 
+		{
 			// TODO Write an implementation for this method declaration
 			return null;
 		}
-
 	}
 
 	/**
@@ -338,7 +454,8 @@ public class EvaluationService {
 	 * @param i
 	 * @return
 	 */
-	public int calculateNthPrime(int i) {
+	public int calculateNthPrime(int i) 
+	{
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
@@ -365,17 +482,17 @@ public class EvaluationService {
 	 * 
 	 * Examples Encoding test gives gvhg Decoding gvhg gives test Decoding gsvjf
 	 * rxpyi ldmul cqfnk hlevi gsvoz abwlt gives thequickbrownfoxjumpsoverthelazydog
-	 *
 	 */
-	static class AtbashCipher {
-
+	static class AtbashCipher 
+	{
 		/**
 		 * Question 13
 		 * 
 		 * @param string
 		 * @return
 		 */
-		public static String encode(String string) {
+		public static String encode(String string) 
+		{
 			// TODO Write an implementation for this method declaration
 			return null;
 		}
@@ -386,7 +503,8 @@ public class EvaluationService {
 		 * @param string
 		 * @return
 		 */
-		public static String decode(String string) {
+		public static String decode(String string) 
+		{
 			// TODO Write an implementation for this method declaration
 			return null;
 		}
@@ -414,7 +532,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isValidIsbn(String string) {
+	public boolean isValidIsbn(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return false;
 	}
@@ -432,7 +551,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isPangram(String string) {
+	public boolean isPangram(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return false;
 	}
@@ -445,7 +565,8 @@ public class EvaluationService {
 	 * @param given
 	 * @return
 	 */
-	public Temporal getGigasecondDate(Temporal given) {
+	public Temporal getGigasecondDate(Temporal given) 
+	{
 		// TODO Write an implementation for this method declaration
 		return null;
 	}
@@ -463,7 +584,8 @@ public class EvaluationService {
 	 * @param set
 	 * @return
 	 */
-	public int getSumOfMultiples(int i, int[] set) {
+	public int getSumOfMultiples(int i, int[] set) 
+	{
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
@@ -504,7 +626,8 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public boolean isLuhnValid(String string) {
+	public boolean isLuhnValid(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return false;
 	}
@@ -536,9 +659,9 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public int solveWordProblem(String string) {
+	public int solveWordProblem(String string) 
+	{
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
-
 }
