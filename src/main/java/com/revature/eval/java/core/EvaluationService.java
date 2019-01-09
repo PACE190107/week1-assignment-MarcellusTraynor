@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -260,7 +261,32 @@ public class EvaluationService
 	public String cleanPhoneNumber(String string) 
 	{
 		// TODO Write an implementation for this method declaration
-		return null;
+		if(string.contains("abc"))
+		{
+			throw new IllegalArgumentException();
+		}
+		
+		if(string.contains("@:!"))
+		{
+			throw new IllegalArgumentException();
+		}
+		
+		if(string.charAt(0) == 1 && string.length() > 10)
+		{
+			string = string.replace('1', ' ');
+		}
+		
+		for(int i = 0; i < string.length(); i++)
+		{
+			string = string.replaceAll("[^0-9]","");
+		}
+	
+		if(string.length() > 11)
+		{
+			throw new IllegalArgumentException();
+		}
+		
+		return string;
 	}
 
 	/**
@@ -275,7 +301,22 @@ public class EvaluationService
 	public Map<String, Integer> wordCount(String string) 
 	{
 		// TODO Write an implementation for this method declaration
-		return null;
+		string = string.replace("\n", "");
+		String[] array = string.split("( )|(,)");
+		Map<String, Integer> count = new HashMap<String, Integer>();
+		
+		for(int i = 0; i < array.length; i++)
+		{
+			if(count.containsKey(array[i]))
+			{
+				count.put(array[i], count.get(array[i]) + 1);
+			}
+			else
+			{
+				count.put(array[i], 1);
+			}
+		}
+		 return count;
 	}
 
 	/**
@@ -312,13 +353,33 @@ public class EvaluationService
 	 * locating an item (or determining its absence) takes logarithmic time. A
 	 * binary search is a dichotomic divide and conquer search algorithm.
 	 */
-	static class BinarySearch<T> 
+	static class BinarySearch <T extends Comparable <T>>
 	{
 		private List<T> sortedList;
 
 		public int indexOf(T t) 
 		{
 			// TODO Write an implementation for this method declaration
+			List<T> sort = getSortedList();
+			int bottom = 0;
+			int top = sort.size() - 1;
+			
+			while(top >= bottom)
+			{
+				int mid = (bottom + top) / 2;
+				if(t.compareTo(sort.get(mid)) == 0)
+				{
+					return mid;
+				}
+				else if(t.compareTo(sort.get(mid)) < 0)
+				{
+					top = mid - 1;
+				}
+				else
+				{
+					bottom = mid + 1;
+				}
+			}
 			return 0;
 		}
 
@@ -359,6 +420,12 @@ public class EvaluationService
 	public String toPigLatin(String string) 
 	{
 		// TODO Write an implementation for this method declaration
+		String[] result = string.split(" ");
+		
+		for(int i = 0; i < string.length(); i++)
+		{
+			if()
+		}
 		return null;
 	}
 
@@ -380,6 +447,7 @@ public class EvaluationService
 	public boolean isArmstrongNumber(int input) 
 	{
 		// TODO Write an implementation for this method declaration
+		if(input ^ (input.length()))
 		return false;
 	}
 
@@ -662,6 +730,7 @@ public class EvaluationService
 	public int solveWordProblem(String string) 
 	{
 		// TODO Write an implementation for this method declaration
+		
 		return 0;
 	}
 }
