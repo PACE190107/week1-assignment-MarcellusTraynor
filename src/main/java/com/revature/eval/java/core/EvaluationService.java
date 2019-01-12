@@ -1,8 +1,6 @@
 package com.revature.eval.java.core;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
@@ -29,7 +27,6 @@ public class EvaluationService
 		{
 			reversed[j] = string.charAt(i);
 		}
-		
 		return new String(reversed);
 	}
 
@@ -57,7 +54,6 @@ public class EvaluationService
 				result += phrase.charAt(i + 1);
 			}
 		}
-		
 		result = result.toUpperCase();
 		return result;
 	}
@@ -99,11 +95,13 @@ public class EvaluationService
 			this.sideOne = sideOne;
 		}
 
-		public double getSideTwo() {
+		public double getSideTwo() 
+		{
 			return sideTwo;
 		}
 
-		public void setSideTwo(double sideTwo) {
+		public void setSideTwo(double sideTwo) 
+		{
 			this.sideTwo = sideTwo;
 		}
 
@@ -172,58 +170,39 @@ public class EvaluationService
 			
 			switch(string.charAt(i))
 			{
-			case 'A': score += 1;
-					  break;
-			case 'E': score += 1;
-			  		  break;
-			case 'I': score += 1;
-			  		  break;
-			case 'O': score += 1;
-			  		  break;
-			case 'U': score += 1;
-			  		  break;
-			case 'L': score += 1;
-			  		  break;
-			case 'N': score += 1;
-			  		  break;
-			case 'R': score += 1;
-			  		  break;
-			case 'S': score += 1;
-			  		  break;
-			case 'T': score += 1;
-			  		  break;
-			case 'D': score += 2;
-			  		  break;
-			case 'G': score += 2;
-			  		  break;
-			case 'B': score += 3;
-					  break;
-			case 'C': score += 3;
-					  break;
-			case 'M': score += 3;
-			  		  break;
-			case 'P': score += 3;
-			  		  break;
-			case 'F': score += 4;
-			  		  break;
-			case 'H': score += 4;
-			  		  break;
-			case 'V': score += 4;
-			  		  break;
-			case 'W': score += 4;
-			  		  break;
-			case 'Y': score += 4;
-			  		  break;
-			case 'K': score += 5;
-			  		  break;
-			case 'J': score += 8;
-					  break;
-			case 'X': score += 8;
-			  		  break;
-			case 'Q': score += 10;
-			  		  break;
-			case 'Z': score += 10;
-			  		  break;
+				case 'A':
+				case 'E':
+				case 'I':
+				case 'O':
+				case 'U':
+				case 'L':
+				case 'N':
+				case 'R':
+				case 'S': 
+				case 'T': score += 1;
+				  		  break;
+				case 'D':
+				case 'G': score += 2;
+				  		  break;
+				case 'B':
+				case 'C':
+				case 'M':
+				case 'P': score += 3;
+				  		  break;
+				case 'F':
+				case 'H':
+				case 'V':
+				case 'W':
+				case 'Y': score += 4;
+				  		  break;
+				case 'K': score += 5;
+				  		  break;
+				case 'J':
+				case 'X': score += 8;
+				  		  break;
+				case 'Q':
+				case 'Z': score += 10;
+						  break;
 			}
 		}
 		return score;
@@ -365,6 +344,7 @@ public class EvaluationService
 			while(top >= bottom)
 			{
 				int mid = (bottom + top) / 2;
+				
 				if(t.compareTo(sort.get(mid)) == 0)
 				{
 					return mid;
@@ -453,10 +433,8 @@ public class EvaluationService
 			{
 				pigLatin = temp.substring(2) + special + "ay ";
 			}
-			
 			phrase = phrase + pigLatin;
 		}
-		
 		return phrase;
 	}
 
@@ -505,29 +483,39 @@ public class EvaluationService
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) 
 	{
-		// TODO Write an implementation for this method declaration
 		List<Long> list = new ArrayList<Long>();
+		long temp = l;
 		
-		if((l % 2) == 0)
+		if(l == 2L)
 		{
-			list.add(2L);
+			list.add(0, 2L);
+			return list;
 		}
 		
-		for(int i = 3; i <= Math.sqrt(l); i +=2)
-		{
-			if((l/i) == 4)
+		for(long i = 2; i <= temp; i++)
+		{	
+			if(isLongPrime(i) && (temp % i) == 0)
 			{
-				list.add(2L);
-				list.add(2L);
+				while(temp % i == 0)
+				{
+					list.add(i);
+					temp /= i;
+				}		
 			}
-			if(i == Math.sqrt(l))
-			{
-				list.add((long) i);
-				list.add((long) i);
-			}
-			
 		}
 		return list;
+	}
+	
+	private static boolean isLongPrime(long i)
+	{
+		for(long j = 2; j < i; j++)
+		{
+			if(i % j == 0)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
@@ -619,18 +607,45 @@ public class EvaluationService
 	 */
 	public int calculateNthPrime(int i) 
 	{
-		// TODO Write an implementation for this method declaration
+		int nthPrime = 0;
+		int count = 0;
 		
+		if(i < 1)
+		{
+			throw new IllegalArgumentException();
+		}
 		
+		if( i == 1)
+		{
+			nthPrime = 2;
+			return nthPrime;
+		}
+		else
+		{
+			count = 1;
+		}
 		
+		for(int k = 3; k <= (i * i); k += 2)
+		{
+			if(isPrime(k))
+			{
+				count++;
+			}
+			
+			if(count == i)
+			{
+				nthPrime = k;
+				break;
+			}
+		}
+		return nthPrime;
 	}
 	
 	private static boolean isPrime(int i)
 	{
-		
 		for(int j = 2; j < i; j++)
 		{
-			if(i%j == 0)
+			if(i % j == 0)
 			{
 				return false;
 			}
@@ -763,7 +778,6 @@ public class EvaluationService
 					decoded += string.charAt(i);
 				}
 			}
-	
 			return decoded;
 		}
 	}
@@ -810,34 +824,34 @@ public class EvaluationService
 			
 			switch(i)
 			{
-			case 0: sum += array[i] * 10;
-					break;
-			case 1: sum += array[i] * 9;
-					break;
-			case 2: sum += array[i] * 8;
-					break;
-			case 3: sum += array[i] * 7;
-					break;
-			case 4: sum += array[i] * 6;
-					break;
-			case 5: sum += array[i] * 5;
-					break;
-			case 6: sum += array[i] * 4;
-					break;
-			case 7: sum += array[i] * 3;
-					break;
-			case 8: sum += array[i] * 2;
-					break;
-			case 9: if(array[i] == 1)
-					{
-						sum += array[i] * 10;
+				case 0: sum += array[i] * 10;
 						break;
-					}
-					else
-					{
-						sum += array[i] * 1;
+				case 1: sum += array[i] * 9;
 						break;
-					}
+				case 2: sum += array[i] * 8;
+						break;
+				case 3: sum += array[i] * 7;
+						break;
+				case 4: sum += array[i] * 6;
+						break;
+				case 5: sum += array[i] * 5;
+						break;
+				case 6: sum += array[i] * 4;
+						break;
+				case 7: sum += array[i] * 3;
+						break;
+				case 8: sum += array[i] * 2;
+						break;
+				case 9: if(array[i] == 1)
+						{
+							sum += array[i] * 10;
+							break;
+						}
+						else
+						{
+							sum += array[i] * 1;
+							break;
+						}
 			}
 		}
 		
@@ -845,7 +859,6 @@ public class EvaluationService
 		{
 			return true;
 		}
-		
 		return false;
 	}
 
@@ -911,7 +924,6 @@ public class EvaluationService
 		{
 			return true;
 		}
-		
 		return false;
 	}
 
@@ -925,11 +937,23 @@ public class EvaluationService
 	 */
 	public Temporal getGigasecondDate(Temporal given) 
 	{
-		// TODO Write an implementation for this method declaration
-		given.get(ChronoField.YEAR);
+		long giga = 1000000000L;
+		LocalDateTime time = null;
 		
+		if(given.isSupported(ChronoField.SECOND_OF_MINUTE))
+		{
+			time = LocalDateTime.of(given.get(ChronoField.YEAR), given.get(ChronoField.MONTH_OF_YEAR), 
+					given.get(ChronoField.DAY_OF_MONTH), given.get(ChronoField.HOUR_OF_DAY), 
+					given.get(ChronoField.MINUTE_OF_HOUR), given.get(ChronoField.SECOND_OF_MINUTE));
+		}
+		else
+		{
+			time = LocalDateTime.of(given.get(ChronoField.YEAR), given.get(ChronoField.MONTH_OF_YEAR), 
+					given.get(ChronoField.DAY_OF_MONTH), 0, 0, 0);
+		}
 		
-		return null;
+		time = time.plusSeconds(giga);
+		return time;
 	}
 
 	/**
@@ -1006,7 +1030,41 @@ public class EvaluationService
 	 */
 	public boolean isLuhnValid(String string) 
 	{
-		// TODO Write an implementation for this method declaration
+		string = string.replaceAll(" ", "");
+		List<Integer> numbers = new ArrayList<Integer>(); 
+		int doubleDigit = 0;
+		int sum = 0;
+		
+		for(int i = (string.length() - 1), j = 0; i >= 0; i--, j++)
+		{
+			if(!Character.isDigit(string.charAt(i)))
+			{
+				return false;
+			}
+			
+			numbers.add(j, ((int)(string.charAt(i)) - 48));
+			
+			  if((j + 1) % 2 == 0) 
+			  { 
+				  doubleDigit = numbers.get(j) * 2; 
+			 
+				  if(doubleDigit > 9) 
+				  { 
+					  doubleDigit -= 9; 
+				  }
+			  
+				  sum += doubleDigit; 
+			  } 
+			  else 
+			  { 
+				  sum += numbers.get(j);
+			  }
+		}
+		
+		if(sum % 10 == 0)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -1039,8 +1097,24 @@ public class EvaluationService
 	 */
 	public int solveWordProblem(String string) 
 	{
-		// TODO Write an implementation for this method declaration
-		
-		return 0;
+		string = string.replaceAll("(What is )|(by )",  "");
+		string = string.replace("?", "");
+		String[] splitString = string.split(" ");
+		Integer operation = 0;
+		Integer x = Integer.parseInt(splitString[0]);
+		Integer y = Integer.parseInt(splitString[2]);
+			
+		switch(splitString[1])
+		{
+			case "plus": operation = x + y;
+							break;
+			case "minus": operation = x - y;
+							break;
+			case "multiplied": operation = x * y;
+							break;
+			case "divided": operation = x / y;
+							break;
+		}
+		return operation;
 	}
 }
